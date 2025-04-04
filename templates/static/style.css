@@ -153,6 +153,10 @@ body {
   visibility: visible;
 }
 
+.menu.hidden ~ .toggle-btn{
+  transform: translateX(19vw);
+}
+
 .logout-btn {
   background-color: #ff4d4d;
   color: white;
