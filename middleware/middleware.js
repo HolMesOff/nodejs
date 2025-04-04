@@ -4,6 +4,8 @@ const mysql = require('mysql2');
 const jwt = require('jsonwebtoken');
 const express = require('express');
 
+require('dotenv').config();
+
 //Ключ для JWT
 const secretKey = 'fg4G34fv$34g';
 
@@ -17,11 +19,11 @@ middleware.use(cookieParser()); //Использование куки-парсе
 
 // Подключение к базе данных
 const connection = mysql.createConnection({
-  host: 'mysql-2d8af2ed-maksimvancman-d02b.h.aivencloud.com',
-  user: 'avnadmin',
-  password: 'AVNS_hpCFaNGec3MwjgdDTnm',
-  port: '20694',
-  database: 'defaultdb'
+  host: process.env.DB_HOST,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_DATABASE,
+  port: process.env.DB-PORT
 });
 
 connection.connect((err) => {
