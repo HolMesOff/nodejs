@@ -1,0 +1,42 @@
+<html>
+<head>
+  <link rel="stylesheet" href="/static/index.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+  <main>
+      
+      <div class="container">
+          <div class="logo">
+            <a href="https://daxgroup.kz"><img src="/static/dax_icon.png"></a>
+          </div>
+          <div class="header">
+              <h1>Добро пожаловать</h1>
+              <h2>Войдите в свой аккаунт</h2>
+          </div>
+          <div class="form-container">
+              <form method="POST" class="login-form">
+                  <div class="input-group">
+                      <label for="name">Логин</label>
+                      <input type="text" name="name" id="name" placeholder="Ваш логин" required />
+                  </div>
+                  <div class="input-group">
+                      <label for="password">Пароль</label>
+                      <input type="password" name="password" id="password" placeholder="••••••••" required />
+                  </div>
+                  <p id="message_error"></p>
+                  <button type="submit" class="submit-btn">Войти</button>
+              </form>
+          </div>
+          <div class="signup-link">
+              <span>Нету аккаунта?</span> <a href="/register">Зарегистрируйтесь</a>
+          </div>
+          <div class="terms">
+              <p>Продолжая, вы соглашаетесь <a href="https://daxgroup.kz/privacy">Политика конфиденциальности</a>.</p>
+          </div>
+      </div>
+  </main>
+
+<script src="/static/index.js"></script>
+</body>
+</html>

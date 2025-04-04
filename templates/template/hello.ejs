@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Отчеты</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="wrapper">
+    <nav class="menu" id="menu">
+      <button id="back-btn" onclick="goBack()"><</button>
+      <div class="logo"><img src="/static/dax_icon.png"></div>
+      <ul id="menu-list">
+        <% reports.forEach(report => { %>
+          <% if (!report.parent_id && report.content) { %> 
+            <li class="report_li">
+              <a href="#" onclick="loadReport('<%= report.id %>')"><%= report.name %></a>
+              <ul id="subcategories-<%= report.id %>">
+              </ul>
+            </li>
+          <% } else if (!report.parent_id) {%>
+            <li class="category_li">
+              <a href="#" onclick="loadSubcategories('<%= report.id %>')"><%= report.name %></a>
+              <ul id="subcategories-<%= report.id %>">
+              </ul>
+            </li>
+        <% }}); %>
+      </ul>
+      <button class="logout-btn" id="logout-btn">Выйти</button>
+    </nav>
+    <button class="toggle-btn" id="toggle-btn">&#9776;</button>
+
+    <div class="content" id="content">
+      <header class="main-header">
+        <div class="logo-content" id="logo-content">Логотип</div>
+        <div class="description-content" id="description-content">Описание</div>
+      </header>
+      <div class="report-content" id="report-content">
+        <p>Выберите отчет</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="/static/hello.js"></script>
+  <script>
+    let historyStack = [];
+
+    function loadSubcategories(parentId) {
+      const reportsString = '<%- JSON.stringify(reports) %>';
+      const reports = JSON.parse(reportsString);
+
+      const subcategoryList = document.getElementById('menu-list');
+      subcategoryList.innerHTML = ''; 
+
+      const childCategories = reports.filter(report => report.parent_id === Number(parentId));
+      childCategories.forEach(subcategory => {
+
+        const listItem = document.createElement('li');
+
+        if (subcategory.content) {
+          listItem.className = 'report_li';
+          listItem.innerHTML = `<a href="#" onclick="loadReport(${subcategory.id}, false)">${subcategory.name}</a>`;
+        } else {
+          listItem.className = 'category_li';
+          listItem.innerHTML = `<a href="#" onclick="loadSubcategories(${subcategory.id})">${subcategory.name}</a>`;
+        }
+        
+        subcategoryList.appendChild(listItem);
+      });
+
+      historyStack.push(parentId);
+    }
+
+    function loadReport(reportId, isSub=false) {
+      var href = isSub ? '/subreport/' : '/report/';
+      fetch(`${href}${reportId}`)
+        .then(response => {
+          if (response.ok) {
+            return response.json().then(data => {
+              document.getElementById('report-content').innerHTML = `${data.content}`;
+              document.getElementById('description-content').innerHTML = `${data.description}`;
+              document.getElementById('report-content').style.color = "#fff";
+              document.getElementById('logo-content').innerHTML = `${data.name}`;
+            });
+          } else {
+            return response.json().then(data => {
+              console.log(data);
+              document.getElementById('description-content').innerHTML = "Ошибка!";
+              document.getElementById('report-content').innerHTML = `${data.error}`;
+              document.getElementById('report-content').style.color = "red";
+              document.getElementById('logo-content').innerHTML = "Ошибка!";
+            });
+          }
+        })
+        .catch(err => console.error('Error loading report:', err));
+    }
+
+    function goBack() {
+      const reportsString = '<%- JSON.stringify(reports) %>';
+      const reports = JSON.parse(reportsString);
+
+      const lastCategoryId = historyStack.pop();
+
+      if (lastCategoryId) {
+        const parentCategory = reports.find(report => report.id === Number(lastCategoryId));
+
+        if (parentCategory && parentCategory.parent_id !== '') {
+          loadSubcategories(parentCategory.parent_id);
+        } else {
+          const subcategoryList = document.getElementById('menu-list');
+          subcategoryList.innerHTML = ''; 
+
+          const childCategories = reports.filter(report => report.parent_id === '');
+          childCategories.forEach(subcategory => {
+
+          const listItem = document.createElement('li');
+
+            if (subcategory.content) {
+              listItem.className = 'report_li';
+              listItem.innerHTML = `<a href="#" onclick="loadReport(${subcategory.id}, false)">${subcategory.name}</a>`;
+            } else {
+              listItem.className = 'category_li';
+              listItem.innerHTML = `<a href="#" onclick="loadSubcategories(${subcategory.id})">${subcategory.name}</a>`;
+            }
+            subcategoryList.appendChild(listItem);
+          });
+        }
+      } else {
+        console.log("История пуста, возврат невозможен.");
+      }
+    }
+
+  </script>
+</body>
+</html>

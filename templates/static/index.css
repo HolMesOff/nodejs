@@ -1,0 +1,187 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #171717; 
+    color: white; /* Белый текст */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.logo {
+    margin-bottom:2vw;
+    text-align: center; 
+}
+
+.logo img {
+    width: 8vw;
+    height: auto; 
+}
+
+.container {
+    background-color: #444; 
+    padding: 2vw;
+    border-radius: 2vw;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    width: 30vw;
+    max-width: 50vw; 
+}
+
+.header h1 {
+    font-size: 2vw;
+    margin-bottom: 1vw;
+    color: white; 
+    text-align: center;
+}
+
+.header h2 {
+    font-size: 1.5vw;
+    color: #ccc; 
+    margin-bottom: 2vw;
+    text-align: center;
+}
+
+.form-container {
+    margin-bottom: 1vw;
+}
+
+.input-group {
+    margin-bottom: 1vw;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 1vw;
+    font-weight: bold;
+    color: #ddd; 
+}
+
+.input-group input {
+    width: 100%;
+    padding: 1vw;
+    border: 1px solid #555;
+    border-radius: 1vw;
+    font-size: 1vw;
+    background-color: #555; 
+    color: white; 
+}
+
+.input-group input::placeholder {
+    color: #bbb; 
+}
+
+#message_error{
+    color:red;
+    font-size:1vw;
+    margin-bottom: 1vw;
+    display:none;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.5vw;
+    background-color: #00bfff; 
+    color: white;
+    border: none;
+    border-radius: 1vw;
+    font-size: 1.5vw;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #008bb9; 
+}
+
+.signup-link, .login-link {
+    text-align: center;
+    font-size: 1vw;
+    color: #ccc; 
+    margin-bottom: 1vw;
+}
+
+.signup-link a, .login-link a {
+    color: #00bfff; 
+    text-decoration: none;
+}
+
+.signup-link a:hover, .login-link a:hover {
+    text-decoration: underline;
+}
+
+.terms {
+    font-size: 1vw;
+    color: #aaa; 
+    text-align: center;
+}
+
+.terms a {
+    color: #00bfff; 
+    text-decoration: none;
+}
+
+.terms a:hover {
+    text-decoration: underline;
+}
+
+/* Медиазапросы для мобильных устройств */
+@media (max-width: 768px) {
+    .logo img {
+        width: 20vw; 
+        margin-bottom: 2vh;
+    }
+
+    .container {
+        padding: 5vw; 
+        width: 80vw; 
+        max-width: 90vw;
+    }
+
+    .header h1 {
+        font-size: 5vw; 
+        margin-bottom: 1vh;
+    }
+
+    .header h2 {
+        font-size: 4vw; 
+        margin-bottom: 2vh;
+    }
+
+    .input-group label {
+        font-size: 4vw; 
+        margin-bottom: 1vh;
+    }
+
+    .input-group input {
+        font-size: 4vw; 
+        padding: 3vw; 
+        border-radius: 2vh;
+        margin-bottom: 2vh;
+    }
+
+    #message_error {
+        font-size: 3.5vw; 
+        margin-bottom: 1.5vh;
+    }
+
+    .submit-btn {
+        font-size: 5vw;
+        padding: 3vw; 
+        border-radius: 2vh;
+        margin-bottom: 2vh;
+    }
+
+    .signup-link, .login-link {
+        font-size: 3vw; 
+        margin-bottom: 2vh;
+    }
+
+    .terms {
+        font-size: 3vw; 
+    }
+}
