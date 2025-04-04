@@ -17,10 +17,11 @@ middleware.use(cookieParser()); //Использование куки-парсе
 
 // Подключение к базе данных
 const connection = mysql.createConnection({
-  host: '127.0.0.1',
-  user: 'root',
-  password: 'rootroot',
-  database: 'nodejs'
+  host: 'mysql-2d8af2ed-maksimvancman-d02b.h.aivencloud.com',
+  user: 'avnadmin',
+  password: 'AVNS_hpCFaNGec3MwjgdDTnm',
+  port: '20694',
+  database: 'defaultdb'
 });
 
 connection.connect((err) => {
