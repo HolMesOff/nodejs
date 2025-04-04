@@ -7,7 +7,7 @@ const app = express();
 const port = 3000;
 
 //Middleware для использования шаблонов и статических файлов(js, css, img)
-app.use('/static', express.static(path.join(__dirname, 'templates/static')));
+app.use('/static', express.static(path.join(__dirname, '../templates/static')));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, '../templates/template'));
 
