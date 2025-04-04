@@ -1,4 +1,3 @@
-wESGH#32RWf#FAW32
 
 //Импорты
 const express = require('express');
